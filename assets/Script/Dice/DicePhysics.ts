@@ -35,6 +35,7 @@ export class DicePhysics extends Component {
     this.node.setPosition(this.initialPos);
     this.node.setRotation(this.initialAngle);
     this.isLanded = false;
+    this.rollButtonClicked();
   }
   setTorque() {
     let torque = new Vec3(

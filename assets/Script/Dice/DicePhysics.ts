@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, Quat, RigidBody, Vec3 } from "cc";
 import { DiceCollision } from "../Collision/DiceCollision";
+import { Userdetails } from "../Manager/Userdetails";
 const { ccclass, property } = _decorator;
 
 @ccclass("DicePhysics")
@@ -11,7 +12,10 @@ export class DicePhysics extends Component {
   DiceRigidBody: RigidBody;
   initialPos: Vec3;
   initialAngle: Quat;
+  UserDetails: Userdetails;
+  OutputFace;
   start() {
+    this.UserDetails = Userdetails.getInstance();
     this.initialPos = this.node.getPosition();
     this.initialAngle = this.node.getRotation();
     this.DiceRigidBody = this.node.getComponent(RigidBody);
@@ -53,8 +57,17 @@ export class DicePhysics extends Component {
       let Component = this.DiceFace[face].getComponent(DiceCollision);
       if (Component.onGroundStay == true) {
         console.log("Face of Dice", Component.DiceColliderOppositeSide);
+        this.OutputFace = Component.DiceColliderOppositeSide;
+        this.result();
         Component.onGroundStay = false;
       }
+    }
+  }
+  result() {
+    if (this.UserDetails.faceSelected == this.OutputFace.toString) {
+      console.log("Correct Prediction");
+    } else {
+      console.log("Wrong Prediction");
     }
   }
   update(deltaTime: number) {

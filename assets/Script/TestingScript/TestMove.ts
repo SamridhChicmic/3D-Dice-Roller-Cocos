@@ -1,4 +1,11 @@
-import { _decorator, Component, MATH_FLOAT_ARRAY, Node, Vec3 } from "cc";
+import {
+  _decorator,
+  Component,
+  MATH_FLOAT_ARRAY,
+  Node,
+  RigidBody,
+  Vec3,
+} from "cc";
 const { ccclass, property } = _decorator;
 
 @ccclass("TestMove")
@@ -12,6 +19,14 @@ export class TestMove extends Component {
       Math.random() * 360,
       Math.random() * 360
     );
+    let torqu = new Vec3(
+      (Math.random() * 360) / 3,
+      (Math.random() * 360) / 4,
+      (Math.random() * 360) / 5
+    );
+    this.node.getComponent(RigidBody).applyTorque(torqu);
+
+    console.log(torqu);
   }
 
   update(deltaTime: number) {}

@@ -64,7 +64,7 @@ export class DicePhysics extends Component {
     }
   }
   result() {
-    if (this.UserDetails.faceSelected == this.OutputFace.toString) {
+    if (this.UserDetails.faceSelected == this.OutputFace.toString()) {
       console.log("Correct Prediction");
     } else {
       console.log("Wrong Prediction");

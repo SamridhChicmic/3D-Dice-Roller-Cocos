@@ -14,17 +14,10 @@ export class DiceCollision extends Component {
   }
   onCollisionStay(event) {
     if (event.otherCollider.node.name != "Dice") {
-      console.log(
-        "Collision Stay",
-        event.otherCollider.node.name,
-        "Side",
-        this.DiceColliderOppositeSide
-      );
       this.onGroundStay = true;
     }
   }
   OnCollisionExit() {
-    console.log(console.log("Collision Exit"));
     this.onGroundStay = false;
   }
   update(deltaTime: number) {}

@@ -4361,6 +4361,9 @@
     "__prefab": {
       "__id__": 195
     },
+    "UserOption": null,
+    "RollButton": null,
+    "RollAgainButton": null,
     "DiceFace": [
       {
         "__id__": 174
@@ -4381,6 +4384,8 @@
         "__id__": 105
       }
     ],
+    "GameEnd": null,
+    "TryAgain": null,
     "_id": ""
   },
   {
@@ -4396,6 +4401,7 @@
       "__id__": 0
     },
     "fileId": "4bDUzUWDhAsoKBMzsVn0Bf",
+    "instance": null,
     "targetOverrides": null
   }
 ]

@@ -33,7 +33,11 @@ export class DicePhysics extends Component {
   }
   setEularAngle() {
     let angle = this.node.eulerAngles;
-    this.node.eulerAngles = new Vec3(angle.x, Math.random() * 360, angle.z);
+    this.node.eulerAngles = new Vec3(
+      Math.random() * 360,
+      Math.random() * 360,
+      Math.random() * 360
+    );
   }
   rollButtonClicked() {
     this.setEularAngle();
@@ -55,8 +59,8 @@ export class DicePhysics extends Component {
   setTorque() {
     let torque = new Vec3(
       Math.random() * 300,
-      Math.random() * 300,
-      Math.random() * 300
+      Math.random() * 400,
+      Math.random() * 200
     );
     this.DiceRigidBody.applyTorque(torque);
   }
@@ -90,7 +94,6 @@ export class DicePhysics extends Component {
         .start();
     } else {
       console.log("Wrong Prediction");
-      console.log(this.TryAgain);
       tween(this.TryAgain)
         .to(0.5, { scale: new Vec3(1, 1, 1) })
         .call(() => {

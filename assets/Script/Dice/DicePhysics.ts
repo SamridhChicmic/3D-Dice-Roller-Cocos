@@ -20,6 +20,7 @@ export class DicePhysics extends Component {
     this.initialAngle = this.node.getRotation();
     this.DiceRigidBody = this.node.getComponent(RigidBody);
     this.DiceRigidBody.useGravity = false;
+    console.log("RigidBody", this.DiceRigidBody);
   }
   setEularAngle() {
     let angle = this.node.eulerAngles;

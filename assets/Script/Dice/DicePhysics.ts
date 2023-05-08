@@ -82,7 +82,10 @@ export class DicePhysics extends Component {
       console.log("Body Sleep");
       this.isLanded = true;
 
-      this.diceSide();
+      let resultoutput = this.diceSide();
+      if (resultoutput == false) {
+        this.rollButtonClicked();
+      }
     }
   }
   diceSide() {
@@ -93,8 +96,10 @@ export class DicePhysics extends Component {
         this.OutputFace = Component.DiceColliderOppositeSide;
         this.result();
         Component.onGroundStay = false;
+        return true;
       }
     }
+    return false;
   }
   result() {
     if (this.UserDetails.faceSelected == this.OutputFace.toString()) {

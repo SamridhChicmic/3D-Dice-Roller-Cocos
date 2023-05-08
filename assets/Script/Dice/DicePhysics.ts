@@ -6,6 +6,12 @@ const { ccclass, property } = _decorator;
 @ccclass("DicePhysics")
 export class DicePhysics extends Component {
   @property({ type: Node })
+  UserOption: Node = null;
+  @property({ type: Node })
+  RollButton = null;
+  @property({ type: Node })
+  RollAgainButton = null;
+  @property({ type: Node })
   DiceFace = [];
   isLanded = false;
   isSleep = false;
@@ -20,7 +26,6 @@ export class DicePhysics extends Component {
     this.initialAngle = this.node.getRotation();
     this.DiceRigidBody = this.node.getComponent(RigidBody);
     this.DiceRigidBody.useGravity = false;
-    console.log("RigidBody", this.DiceRigidBody);
   }
   setEularAngle() {
     let angle = this.node.eulerAngles;
@@ -36,7 +41,9 @@ export class DicePhysics extends Component {
     this.node.setPosition(this.initialPos);
     this.node.setRotation(this.initialAngle);
     this.isLanded = false;
-    this.rollButtonClicked();
+    this.UserOption.active = true;
+    this.RollAgainButton.active = false;
+    this.RollButton.active = false;
   }
   setTorque() {
     let torque = new Vec3(

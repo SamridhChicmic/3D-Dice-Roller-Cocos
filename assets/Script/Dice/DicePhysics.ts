@@ -20,16 +20,28 @@ export class DicePhysics extends Component {
   isLanded = false;
   isSleep = false;
   DiceRigidBody: RigidBody;
-  initialPos: Vec3;
+  initialPos: Vec3 = new Vec3(-0.248, 5, -7.864);
   initialAngle: Quat;
   UserDetails: Userdetails;
   OutputFace;
+
+  position = [
+    { pos: new Vec3(7.972, 3.105, 0.11), velocity: new Vec3(-15, 0, 0) },
+    { pos: new Vec3(-7.972, 3.105, 0.11), velocity: new Vec3(15, 0, 0) },
+    { pos: new Vec3(-0.248, 3.105, 7.864), velocity: new Vec3(0, 0, -15) },
+  ];
   start() {
     this.UserDetails = Userdetails.getInstance();
-    this.initialPos = this.node.getPosition();
     this.initialAngle = this.node.getRotation();
     this.DiceRigidBody = this.node.getComponent(RigidBody);
     this.DiceRigidBody.useGravity = false;
+  }
+  setPositionAndVelocity() {
+    let index = Math.floor(Math.random() * 10) % 3;
+
+    console.log("POS", index);
+    this.node.setPosition(this.position[index].pos);
+    this.DiceRigidBody.setLinearVelocity(this.position[index].velocity);
   }
   setEularAngle() {
     let angle = this.node.eulerAngles;
@@ -42,6 +54,7 @@ export class DicePhysics extends Component {
   rollButtonClicked() {
     this.setEularAngle();
     this.setTorque();
+    this.setPositionAndVelocity();
     this.DiceRigidBody.useGravity = true;
     this.RollButton.active = false;
   }

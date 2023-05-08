@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Quat, RigidBody, Vec3 } from "cc";
+import { _decorator, Component, Node, Quat, RigidBody, tween, Vec3 } from "cc";
 import { DiceCollision } from "../Collision/DiceCollision";
 import { Userdetails } from "../Manager/Userdetails";
 const { ccclass, property } = _decorator;
@@ -13,6 +13,10 @@ export class DicePhysics extends Component {
   RollAgainButton = null;
   @property({ type: Node })
   DiceFace = [];
+  @property({ type: Node })
+  GameEnd: Node = null;
+  @property({ type: Node })
+  TryAgain: Node = null;
   isLanded = false;
   isSleep = false;
   DiceRigidBody: RigidBody;
@@ -35,6 +39,7 @@ export class DicePhysics extends Component {
     this.setEularAngle();
     this.setTorque();
     this.DiceRigidBody.useGravity = true;
+    this.RollButton.active = false;
   }
   rollAgainButtonClicked() {
     this.DiceRigidBody.useGravity = false;
@@ -44,6 +49,8 @@ export class DicePhysics extends Component {
     this.UserOption.active = true;
     this.RollAgainButton.active = false;
     this.RollButton.active = false;
+    this.GameEnd.scale = new Vec3(0, 0, 0);
+    this.TryAgain.scale = new Vec3(0, 0, 0);
   }
   setTorque() {
     let torque = new Vec3(
@@ -75,8 +82,21 @@ export class DicePhysics extends Component {
   result() {
     if (this.UserDetails.faceSelected == this.OutputFace.toString()) {
       console.log("Correct Prediction");
+      tween(this.GameEnd)
+        .to(0.5, { scale: new Vec3(1, 1, 1) })
+        .call(() => {
+          this.RollAgainButton.active = true;
+        })
+        .start();
     } else {
       console.log("Wrong Prediction");
+      console.log(this.TryAgain);
+      tween(this.TryAgain)
+        .to(0.5, { scale: new Vec3(1, 1, 1) })
+        .call(() => {
+          this.RollAgainButton.active = true;
+        })
+        .start();
     }
   }
   update(deltaTime: number) {

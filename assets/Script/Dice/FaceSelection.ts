@@ -28,7 +28,6 @@ export class FaceSelection extends Component {
   onSelect(event) {
     console.log("node selected", event.target.name);
     this.node.active = false;
-    this.RollAgainButton.active = true;
     this.RollButton.active = true;
     this.FaceSelected = event.target.name;
     this.userdetails.faceSelected = this.FaceSelected;
